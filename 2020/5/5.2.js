@@ -5,28 +5,10 @@ let input = fs.readFileSync('input', 'utf-8')
 let boardingPasses = input.split('\n')
 
 const findSeat = pass => {
-  let row = [...Array(128).keys()]
-  let column = [...Array(8).keys()]
-  for (let index = 0; index < pass.length; index++) {
-    switch(pass[index]){
-      case "F":
-        row = row.slice(0, row.length/2)
-        break
-      case "B":
-        row = row.slice(-row.length/2)
-        break
-      case "L":
-        column = column.slice(0, column.length/2)
-        break
-      case "R":
-        column = column.slice(-column.length/2)
-        break
-      default:
-        console.log('Unexpected character')
-        break
-    }
-  }
-  return (row[0] * 8) + column[0]
+  let row = parseInt(pass.slice(0,7).replaceAll('F', '0').replaceAll('B', '1'), 2)
+  let column = parseInt(pass.slice(-3).replaceAll('L', '0').replaceAll('R', '1'), 2)
+
+  return (row * 8) + column
 }
 
 let seatIds = boardingPasses.map(pass => findSeat(pass)).sort()
