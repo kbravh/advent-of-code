@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-let rules = fs.readFileSync('input', 'utf-8').split('\n')
+let rules = fs.readFileSync('input', 'utf-8').trim().split('\n')
 
 // find rules that mention shiny gold bag in second half, add to set
 // find rules that mention those new bags in second half, add to set
